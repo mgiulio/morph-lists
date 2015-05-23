@@ -7,7 +7,8 @@ var morphList = (function() {
 		},
 		source,
 		sourceChildren,
-		targetChildren
+		targetChildren,
+		morphingClassName = 'morphing'
 	;
 	
 	return addCssRules;
@@ -72,7 +73,7 @@ var morphList = (function() {
 		onTransitionEnd.done = done;
 		source.addEventListener('transitionend', onTransitionEnd, false);
 
-		source.classList.add('morphing');
+		source.classList.add(morphingClassName);
 		
 		moves.forEach(function(m) {
 			var movingNode = sourceChildren[m[0]];
@@ -84,14 +85,14 @@ var morphList = (function() {
 	}
 	
 	function onTransitionEnd(e) {
-		source.classList.remove('morphing');
+		source.classList.remove(morphingClassName);
 		source.removeEventListener('transitionend', onTransitionEnd, false);
 		onTransitionEnd.done();
 	}
  
 	function addCssRules() {
 		var style = document.createElement('style');
-		style.textContent = '.morphing > li { transition: transform 1s linear; }';
+		style.textContent = '.' + morphingClassName + ' > li { transition: transform 1s linear; }';
 		document.head.appendChild(style);
 		
 		window.morphList = morphList;
