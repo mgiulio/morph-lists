@@ -69,11 +69,8 @@ var morphList = (function() {
 	}
 
 	function animateMoves(moves, done) {
-		source.addEventListener('transitionend', function f(e) {
-			source.classList.remove('morphing');
-			source.removeEventListener('transitionend', f, false);
-			done();
-		}, false);
+		onTransitionEnd.done = done;
+		source.addEventListener('transitionend', onTransitionEnd, false);
 
 		source.classList.add('morphing');
 		
@@ -84,6 +81,12 @@ var morphList = (function() {
 			var displacement = [destNode.offsetLeft - movingNode.offsetLeft, destNode.offsetTop - movingNode.offsetTop];
 			movingNode.style.transform = `translate(${displacement[0] + 'px'}, ${displacement[1] + 'px'})`;
 		});
+	}
+	
+	function onTransitionEnd(e) {
+		source.classList.remove('morphing');
+		source.removeEventListener('transitionend', onTransitionEnd, false);
+		onTransitionEnd.done();
 	}
  
 	function addCssRules() {
