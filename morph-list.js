@@ -27,8 +27,6 @@ var morphList = (function() {
 				source.appendChild(li);
 			});
 		});
-		//animateSwap(0, 2);
-		//findSwaps(sourceChildren, target.children).forEach(function(swap) { animateSwap(swap[0], swap[1]); });
 	}
 
 	function findMoves(sourceChildren, targetChildren) {
@@ -87,27 +85,7 @@ var morphList = (function() {
 			movingNode.style.transform = `translate(${displacement[0] + 'px'}, ${displacement[1] + 'px'})`;
 		});
 	}
-
-	function animateSwap(i, j) {
-		var iNode = sourceChildren[i];
-		var jNode = sourceChildren[j];
-		
-		var displacement = [jNode.offsetLeft - iNode.offsetLeft, jNode.offsetTop - iNode.offsetTop];
-		iNode.style.transform = `translate(${displacement[0] + 'px'}, ${displacement[1] + 'px'})`;
-		jNode.style.transform = `translate(-${displacement[0] + 'px'}, -${displacement[1] + 'px'})`;
-		
-		source.addEventListener('transitionend', function f(e) {
-			source.removeEventListener('transitionend', f, false);
-			
-			iNode.style.transform = '';
-			jNode.style.transform = '';
-			
-			var next = jNode.nextElementSibling;
-			source.insertBefore(jNode, iNode);
-			source.insertBefore(iNode, next);
-		}, false);
-	}
-	 
+ 
 	function addCssRules() {
 		var style = document.createElement('style');
 		style.textContent = '.morphing > li { transition: transform 1s linear; }';
