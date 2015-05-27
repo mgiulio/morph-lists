@@ -5,17 +5,39 @@ var morphList = (function() {
 		toArray = function(o, n) { 
 			return slice.call(o, n || 0); 
 		},
+		augment = function(target) {
+			var length = arguments.length;
+			for (var index = 1; index < length; index++) {
+				var 
+					source = arguments[index],
+					keys = Object.keys(source),
+					l = keys.length
+				;
+				for (var i = 0; i < l; i++) {
+					var key = keys[i];
+					target[key] = source[key];
+				}
+			}
+			return target;
+		},
+		
 		source,
 		sourceChildren,
 		targetChildren,
-		morphingClassName = 'morphing'
+		morphingClassName = 'morphing',
+		defaultCfg = {
+			duration: 1
+		},
+		cfg
 	;
 	
 	return addCssRules;
 
-	function morphList(_source, targetMarkup) {
+	function morphList(_source, targetMarkup, _cfg) {
 		source = _source;
 		sourceChildren = source.children;
+		
+		cfg = augment({}, defaultCfg, _cfg || {});
 		
 		var target = document.createElement('div');
 		target.innerHTML = targetMarkup;

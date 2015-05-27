@@ -88,7 +88,7 @@ function buttonHandler(e) {
 	}
 	
 	var html = listTemplate(collection);
-	morphList(sourceList, html);
+	morphList(sourceList, html/* , {duration: 2} */);
 }
 
 // Adapted from Underscore.js
