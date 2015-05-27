@@ -26,9 +26,10 @@ var morphList = (function() {
 		targetChildren,
 		morphingClassName = 'morphing',
 		defaultCfg = {
-			duration: 1
+			duration: '1s'
 		},
-		cfg
+		cfg,
+		itemStyle
 	;
 	
 	return addCssRules;
@@ -38,6 +39,8 @@ var morphList = (function() {
 		sourceChildren = source.children;
 		
 		cfg = augment({}, defaultCfg, _cfg || {});
+		
+		itemStyle.transition = 'transform ' + cfg.duration + ' linear';
 		
 		var target = document.createElement('div');
 		target.innerHTML = targetMarkup;
@@ -91,8 +94,9 @@ var morphList = (function() {
  
 	function addCssRules() {
 		var style = document.createElement('style');
-		style.textContent = '.' + morphingClassName + ' > li { transition: transform 1s linear; }';
+		style.textContent = '.' + morphingClassName + ' > li {  }';
 		document.head.appendChild(style);
+		itemStyle = style.sheet.cssRules[0].style;
 		
 		window.morphList = morphList;
 		morphList.apply(this, arguments);

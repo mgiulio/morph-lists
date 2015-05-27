@@ -88,7 +88,8 @@ function buttonHandler(e) {
 	}
 	
 	var html = listTemplate(collection);
-	morphList(sourceList, html/* , {duration: 2} */);
+	var duration = 0.5 + Math.random() * 5;
+	morphList(sourceList, html, {'duration':  duration + 's'});
 }
 
 // Adapted from Underscore.js
