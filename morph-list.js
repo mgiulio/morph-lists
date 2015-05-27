@@ -45,30 +45,7 @@ var morphList = (function() {
 		
 		return moves;
 	}
-
-	function findSwaps(source, target) {
-		var 
-			swaps = [],
-			source = toArray(source),
-			sl = source.length,
-			tl = targetChildren.length,
-			i, j
-		;
-		
-		for (i = 0; i < sl; i++) {
-			var s = source[i];
-			for (j = 0; j < tl; j++) {
-				var t = targetChildren[j];
-				if (s.id === t.id && i != j) {
-					swaps.push([i, j]);
-					break;
-				}
-			}
-		}
-		
-		return swaps;
-	}
-
+	
 	function animateMoves(moves, done) {
 		onTransitionEnd.done = done;
 		source.addEventListener('transitionend', onTransitionEnd, false);
