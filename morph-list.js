@@ -35,6 +35,18 @@ var morphList = (function() {
 	;
 	
 	return install;
+	
+	function install() {
+		target = document.createElement('div');
+		
+		var style = document.createElement('style');
+		style.textContent = '.' + morphingClassName + ' > li {  }';
+		document.head.appendChild(style);
+		itemStyle = style.sheet.cssRules[0].style;
+		
+		window.morphList = morphList;
+		morphList.apply(this, arguments);
+	}
 
 	function morphList(_source, targetMarkup, _cfg) {
 		source = _source;
@@ -70,7 +82,6 @@ var morphList = (function() {
 	}
 	
 	function animateMoves(moves, done) {
-		onTransitionEnd.done = done;
 		source.addEventListener('transitionend', onTransitionEnd, false);
 
 		source.classList.add(morphingClassName);
@@ -82,24 +93,12 @@ var morphList = (function() {
 			var displacement = [destNode.offsetLeft - movingNode.offsetLeft, destNode.offsetTop - movingNode.offsetTop];
 			movingNode.style.transform = `translate(${displacement[0] + 'px'}, ${displacement[1] + 'px'})`;
 		});
-	}
-	
-	function onTransitionEnd(e) {
-		source.classList.remove(morphingClassName);
-		source.removeEventListener('transitionend', onTransitionEnd, false);
-		onTransitionEnd.done();
+		
+		function onTransitionEnd() {
+			source.classList.remove(morphingClassName);
+			source.removeEventListener('transitionend', onTransitionEnd, false);
+			done();
+		}
 	}
  
-	function install() {
-		target = document.createElement('div');
-		
-		var style = document.createElement('style');
-		style.textContent = '.' + morphingClassName + ' > li {  }';
-		document.head.appendChild(style);
-		itemStyle = style.sheet.cssRules[0].style;
-		
-		window.morphList = morphList;
-		morphList.apply(this, arguments);
-	}
-
 })();
