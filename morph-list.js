@@ -26,7 +26,8 @@ var morphList = (function() {
 		targetChildren,
 		morphingClassName = 'morphing',
 		defaultCfg = {
-			duration: '1s'
+			duration: '1s',
+			easing: 'ease-in-out'
 		},
 		cfg,
 		itemStyle
@@ -40,7 +41,7 @@ var morphList = (function() {
 		
 		cfg = augment({}, defaultCfg, _cfg || {});
 		
-		itemStyle.transition = 'transform ' + cfg.duration + ' linear';
+		itemStyle.transition = 'transform ' + cfg.duration + ' ' + cfg.easing;
 		
 		var target = document.createElement('div');
 		target.innerHTML = targetMarkup;
