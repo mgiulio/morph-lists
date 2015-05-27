@@ -33,7 +33,7 @@ var morphList = (function() {
 		itemStyle
 	;
 	
-	return addCssRules;
+	return installCSS;
 
 	function morphList(_source, targetMarkup, _cfg) {
 		source = _source;
@@ -49,10 +49,7 @@ var morphList = (function() {
 
 		animateMoves(findMoves(sourceChildren, targetChildren), function() {
 			source.innerHTML = '';
-			
-			targetChildren.forEach(function(li) {
-				source.appendChild(li);
-			});
+			targetChildren.forEach(source.appendChild.bind(source));
 		});
 	}
 
@@ -93,7 +90,7 @@ var morphList = (function() {
 		onTransitionEnd.done();
 	}
  
-	function addCssRules() {
+	function installCSS() {
 		var style = document.createElement('style');
 		style.textContent = '.' + morphingClassName + ' > li {  }';
 		document.head.appendChild(style);
