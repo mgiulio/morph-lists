@@ -23,6 +23,7 @@ var morphList = (function() {
 		
 		source,
 		sourceChildren,
+		target,
 		targetChildren,
 		morphingClassName = 'morphing',
 		defaultCfg = {
@@ -33,7 +34,7 @@ var morphList = (function() {
 		itemStyle
 	;
 	
-	return installCSS;
+	return install;
 
 	function morphList(_source, targetMarkup, _cfg) {
 		source = _source;
@@ -43,7 +44,6 @@ var morphList = (function() {
 		
 		itemStyle.transition = 'transform ' + cfg.duration + ' ' + cfg.easing;
 		
-		var target = document.createElement('div');
 		target.innerHTML = targetMarkup;
 		targetChildren = toArray(target.firstElementChild.children);
 
@@ -90,7 +90,9 @@ var morphList = (function() {
 		onTransitionEnd.done();
 	}
  
-	function installCSS() {
+	function install() {
+		target = document.createElement('div');
+		
 		var style = document.createElement('style');
 		style.textContent = '.' + morphingClassName + ' > li {  }';
 		document.head.appendChild(style);
