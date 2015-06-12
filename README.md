@@ -1,10 +1,23 @@
 # About
 
-	
-# Demo
+An exercise about the animation of changes in a container of elements.
 
-It uses Template Strings
+At the moment only animation of permutations(sortings) of children items are implemented, so no additions of new items or removals are supported.
+
+[Demo](https://mgiulio.github.io/morph-lists/demo/grid-view/).
+
+An exercise about the animation of changes in a container of elements
 
 # TechNotes
 
-It uses Template Strings
+##  CSS 
+
+* Transforms
+* Transitions and their events
+
+## JavaScript
+
+* VanillaJS
+* classList API
+* Style sheets scripting
+* ES6 Template Strings
