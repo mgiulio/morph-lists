@@ -31,11 +31,7 @@ li {
 	text-align: center;
 	
 	background-color: #f6f6f6;
-	border-bottom: 1px solid #e6e6e6;
 	color: #666;
-}
-li:last-child {
-	border-bottom: none;
 }
 li.completed {
 	background-color: #e5f3c2;
