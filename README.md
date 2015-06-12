@@ -6,8 +6,6 @@ At the moment only animation of permutations(sortings) of children items are imp
 
 [Demo](https://mgiulio.github.io/morph-lists/demo/grid-view/).
 
-An exercise about the animation of changes in a container of elements
-
 # TechNotes
 
 ##  CSS 
